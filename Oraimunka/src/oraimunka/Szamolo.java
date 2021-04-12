@@ -50,8 +50,13 @@ public class Szamolo extends javax.swing.JFrame {
         fileMenu = new javax.swing.JMenu();
         megnyitMenuItem = new javax.swing.JMenuItem();
         mentMenuItem = new javax.swing.JMenuItem();
+        MenuItemMentésmasként = new javax.swing.JMenuItem();
         KilepMenuItem = new javax.swing.JMenuItem();
         muveletekMenu = new javax.swing.JMenu();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,12 +173,32 @@ public class Szamolo extends javax.swing.JFrame {
         mentMenuItem.setText("Ment");
         fileMenu.add(mentMenuItem);
 
+        MenuItemMentésmasként.setText("Mentés Másként");
+        fileMenu.add(MenuItemMentésmasként);
+
         KilepMenuItem.setText("Kilép");
         fileMenu.add(KilepMenuItem);
 
         jMenuBar1.add(fileMenu);
 
         muveletekMenu.setText("Müveletek");
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("Összeadás");
+        muveletekMenu.add(jRadioButtonMenuItem1);
+
+        jRadioButtonMenuItem2.setSelected(true);
+        jRadioButtonMenuItem2.setText("Kivonás");
+        muveletekMenu.add(jRadioButtonMenuItem2);
+
+        jRadioButtonMenuItem3.setSelected(true);
+        jRadioButtonMenuItem3.setText("Szorzás");
+        muveletekMenu.add(jRadioButtonMenuItem3);
+
+        jRadioButtonMenuItem4.setSelected(true);
+        jRadioButtonMenuItem4.setText("Osztás");
+        muveletekMenu.add(jRadioButtonMenuItem4);
+
         jMenuBar1.add(muveletekMenu);
 
         setJMenuBar(jMenuBar1);
@@ -269,6 +294,7 @@ public class Szamolo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem KilepMenuItem;
     private javax.swing.JLabel KivonLabel;
+    private javax.swing.JMenuItem MenuItemMentésmasként;
     private javax.swing.JLabel SzorzasLabel1;
     private javax.swing.JLabel ellenorzesLabel;
     private javax.swing.JButton ellenorzésButton;
@@ -278,6 +304,10 @@ public class Szamolo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
     private javax.swing.JLabel kivonasLabel1;
     private javax.swing.JMenuItem megnyitMenuItem;
     private javax.swing.JButton megoldasButton;
