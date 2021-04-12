@@ -5,6 +5,15 @@
  */
 package oraimunka;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Dani
@@ -171,9 +180,19 @@ public class Szamolo extends javax.swing.JFrame {
         fileMenu.add(megnyitMenuItem);
 
         mentMenuItem.setText("Ment");
+        mentMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mentMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(mentMenuItem);
 
         MenuItemMentésmasként.setText("Mentés Másként");
+        MenuItemMentésmasként.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemMentésmaskéntActionPerformed(evt);
+            }
+        });
         fileMenu.add(MenuItemMentésmasként);
 
         KilepMenuItem.setText("Kilép");
@@ -255,6 +274,53 @@ public class Szamolo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MenuItemMentésmaskéntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemMentésmaskéntActionPerformed
+        JFileChooser fc = new JFileChooser(new File("."));
+        fc.setDialogTitle("Mentés Másként ");
+        
+        FileNameExtensionFilter imgfilter = new FileNameExtensionFilter("PING és GIF képek","png","gif");
+        fc.addChoosableFileFilter(imgfilter);
+        FileNameExtensionFilter txtfilter = new FileNameExtensionFilter("PING és GIF képek","png","gif");
+        fc.addChoosableFileFilter(txtfilter);
+        FileNameExtensionFilter mdfilter = new FileNameExtensionFilter("PING és GIF képek","png","gif");
+        fc.addChoosableFileFilter(mdfilter);
+        
+        fc.setFileFilter(txtfilter);
+        
+        int valastottGomb = (fc.showSaveDialog(this));
+        if (valastottGomb == JFileChooser.APPROVE_OPTION) {
+            File f = fc.getSelectedFile();
+            String[] kit = ((FileNameExtensionFilter)fc.getFileFilter()).getExtensions();
+            String fn = f.getName() + "." +kit[0];
+            eredmenyLabel.setText("<html>elérés: " + f.getPath() + "<br>könytár: " + fn);
+            try {
+                Files.write(Paths.get(f.getPath()+"."+kit[0]), "statisztika:".getBytes());
+            } catch (IOException ex) {
+                Logger.getLogger(Szamolo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_MenuItemMentésmaskéntActionPerformed
+
+    private void mentMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mentMenuItemActionPerformed
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Fájl mentése");
+        fc.setCurrentDirectory(new File("."));
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int valastottGomb = (fc.showSaveDialog(this));
+        if (valastottGomb == JFileChooser.APPROVE_OPTION) {
+            File f = fc.getSelectedFile();
+            if (f.isDirectory()) {
+                eredmenyLabel.setText("<html>elérés: " + f.getPath() + "<br>könytár: " + f.getName());
+                try {
+                    Files.write(Paths.get(f.getPath(), "Stat.txt"), "statisztika:".getBytes());
+                } catch (IOException ex) {
+                    Logger.getLogger(Szamolo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_mentMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
