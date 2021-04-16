@@ -8,10 +8,12 @@ package oraimunka;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -292,10 +294,27 @@ public class Szamolo extends javax.swing.JFrame {
         if (valastottGomb == JFileChooser.APPROVE_OPTION) {
             File f = fc.getSelectedFile();
             String[] kit = ((FileNameExtensionFilter)fc.getFileFilter()).getExtensions();
-            String fn = f.getName() + "." +kit[0];
-            eredmenyLabel.setText("<html>elérés: " + f.getPath() + "<br>könytár: " + fn);
+            String fn = f.getPath() + "." +kit[0];
+            
+            if(!fn.endsWith("."+kit[0])){
+                fn +="."+kit[0];
+            }
+            
+            Path path =Paths.get(fn);
+            boolean mentes=true;
+            
+            if(Files.exists(path)){
+                valastottGomb = JOptionPane.showConfirmDialog(this,"Felülírjam?", "A Fájl létezik",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+                if(valastottGomb  == JOptionPane.NO_OPTION){
+                    mentes= false;
+                }
+            }
+            eredmenyLabel.setText("<html>elérés: " + fn + "<br>könytár: " +getName()+"."+ kit[0]);
             try {
-                Files.write(Paths.get(f.getPath()+"."+kit[0]), "statisztika:".getBytes());
+                if(mentes){
+                Files.write(path, "statisztika:".getBytes());
+                }
+                
             } catch (IOException ex) {
                 Logger.getLogger(Szamolo.class.getName()).log(Level.SEVERE, null, ex);
             }
